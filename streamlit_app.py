@@ -1,6 +1,32 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+# 1. 데이터 정의
+원소 = ["선택하세요", "수소", "산소", "탄소", "질소"]
+특징 = ["", "물을 구성하는 원소", "호흡에 필요한 원소", "생물을 구성하는 주요 원소", "공기의 약78%를 차지하는 원소"]
+
+# 웹 페이지 제목
+st.title("🧪 원소 정보 조회 프로그램")
+st.write("원소를 선택하시면 해당 원소의 특징을 알려드립니다.")
+
+st.markdown("---")
+
+# 2. 스트림릿 위젯을 이용한 입력 (selectbox 활용)
+# 사용자가 직관적으로 선택할 수 있도록 드롭다운 메뉴를 제공합니다.
+선택 = st.selectbox("조회할 원소를 선택해주세요:", 원소)
+
+# 3. 결과 출력 로직 (핵심 로직 유지)
+if 선택 == "선택하세요":
+    st.info("원소를 선택하시면 자세한 특징이 아래에 표시됩니다.")
+    
+elif 선택 in 원소[1:]:
+    # 선택한 원소의 인덱스를 찾아 특징을 매칭합니다.
+    인덱스 = 원소.index(선택)
+    
+    # st.success를 활용해 깔끔하고 돋보이게 결과 출력
+    st.success(f"### 💡 {선택}의 특징")
+    st.write(f"👉 **{특징[인덱스]}**")
+
+# 4. 프로그램 종료 안내 (웹 특성에 맞게 수정)
+st.markdown("---")
+if st.button("프로그램 종료하기"):
+    st.warning("웹 브라우저 탭을 닫으시면 프로그램이 완전히 종료됩니다.")
